@@ -1,0 +1,56 @@
+{% extends '../base.html' %} {% load static %}
+
+{% block title %} Registrate {% endblock %}
+
+{% block nav %}
+
+    <header class="w-full flex justify-between items-center p-3 bg-nav sm:h-20">
+        <div>
+            <img src="../../static/img/unijoblink.png" width="200px" alt="Logo">
+        </div>
+
+        <nav class="w-52 flex justify-between items-center">
+            <a href="{% url 'register' %}" class="p-1 bg-blue-500 text-white rounded-md">Registrate</a>
+            <a href="{% url 'login' %}" class="p-1 hover:bg-blue-500 hover:text-white rounded-md transition-colors delay-75 duration-200">Iniciar sesión</a>
+        </nav>
+
+    </header>
+
+{% endblock %}
+
+{% block body %}
+
+<section class="w-full h-view flex justify-center items-center">
+    <div class="flex flex-col justify-center items-center h-96 bg-nav w-10/12 md:w-7/12 md:h-2/3 lg:w-3/6 rounded-xl shadow-2xl shadow-blue-500/50 border-2 border-blue-200">
+        <!-- <h1 class="text-2xl md:text-3xl font-bold">Iniciar sesión</h1> -->
+
+        
+        
+
+        <form method="post" class="flex flex-col justify-evenly items-center h-36 md:h-52 md:w-2/3 w-2/3 form-register">
+
+            {% csrf_token %}
+
+            {% for fill in form_r %}
+                <label>{{ fill.label }}</label>
+                {{ fill }}
+            {% endfor %}
+
+            <div class="w-full my-3 bg-red-500 rounded-md flex justify-center items-center text-white">
+                
+                {{ form_r.errors }}
+                    
+            </div>
+            
+            <div class="w-full mt-2 flex justify-between md:justify-evenly items-center">
+                <!-- <button type="submit" class="p-1 bg-blue-500 text-white rounded-md md:text-lg">Registrarme</button> -->
+                <input type="submit" class="p-1 bg-blue-500 text-white rounded-md md:text-lg" value="Registrarme">
+
+                <a href="{% url 'login' %}" class="p-1 hover:bg-blue-500 hover:text-white rounded-md transition-colors delay-75 duration-200 md:text-lg">Iniciar sesión</a>
+            </div>
+                
+        </form>
+
+</section>
+
+{% endblock %}

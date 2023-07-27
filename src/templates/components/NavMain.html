@@ -1,0 +1,32 @@
+
+{% load static %}
+
+<header class="z-50 h-20 w-screen max-w-full flex justify-between items-center p-3 bg-nav relative">
+    <a href="{% url 'home' %}" class="">
+        <img src="../../static/img/unijoblink.png" width="200px" alt="">
+    </a>
+
+    <button id="toggle" class="hover:text-blue-500 md:hidden">Menu</button>
+    <nav class="hidden md:flex justify-between items-center w-[500px]">
+        
+        {% for link in data %}
+            <a href="{% url link.url %}" class="w-full hover:bg-blue-500 hover:text-nav text-center py-3 transition-colors duration-200">{{ link.title }}</a>
+        {% endfor %}
+        
+        {% if user.is_superuser %}
+            <a href="http://localhost:8000/admin/" class="w-full hover:bg-blue-500 hover:text-nav text-center py-3 transition-colors duration-200">Administrador</a>
+            
+        {% endif %}
+            
+    </nav>
+
+</header>
+<nav class="absolute -top-48 z-40 w-full h-52 flex flex-col items-center bg-nav transition-all duration-200" id="nav-responsive">
+    
+    {% for link in data %}
+        <a href="{% url link.url %}" class="w-full hover:bg-blue-500 hover:text-nav text-center py-3 transition-colors duration-200">{{ link.title }}</a>
+    {% endfor %}
+
+    <a href="http://localhost:8000/admin/" class="w-full hover:bg-blue-500 hover:text-nav text-center py-3 transition-colors duration-200">Administrador</a>
+        
+</nav>

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    .form-register input[type="text"],
+    .form-register input[type="email"],
+    .form-register input[type="password"] {
+        @apply p-1 rounded-lg outline-none md:w-full
+    }
+
+    .form-inputs {
+        @apply border-none bg-nav p-2 rounded-md my-4 w-full md:w-1/2
+    }
+}

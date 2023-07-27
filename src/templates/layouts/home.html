@@ -1,0 +1,84 @@
+{% extends '../base.html' %} {% load static %}
+
+{% block title %} Vacantes {% endblock %}
+
+{% block nav %} {% include nav with data=nav_data %} {% endblock %}
+
+{% block body %}
+
+
+{% if messages %}
+    
+    {% for message in messages %}
+        
+        {% if message.tags == "success" %}
+            <script>
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            </script>
+        
+        {% else %}
+
+            <script>
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            </script>
+            
+        {% endif %}
+            
+    {% endfor %}
+        
+{% endif %}
+    
+
+<div class="w-screen flex p-11">
+    <section class="w-2/6 h-[600px] bg-nav hidden md:flex md:flex-col items-center overflow-y-auto">
+
+        <p class="text-xl font-normal mt-4">Áreas de vacante</p>
+
+        <div class="flex flex-col items-left w-full">
+            {% for area in vacantes  %}
+            
+                {% include filter with areas=area.area %}
+
+            {% endfor %}
+        </div>
+    </section>
+    <main class="w-full min-h-full flex flex-col justify-evenly items-center relative">
+        {% for vacante in vacantes %}
+            {% include '../components/Vacantes.html' with title=vacante.nombreVacante body=vacante.descripcion area=vacante.area slug=vacante.slug  %}
+        {% endfor %}
+    </main>
+    <section class="w-2/6 h-[600px] bg-nav hidden md:flex md:flex-col">
+        {% include '../components/Perfil.html' with postulados=postulados %}
+    </section>
+</div>
+
+<section class="lg:hidden z-50 w-full min-h-full bg-nav absolute transition-all duration-200 top-0 -right-full" id="filter">
+    <button class="sticky p-3" id="filter-close"><i class="fi fi-rr-cross hover:text-blue-600"></i></button>
+    
+    <div class="flex flex-col items-center">
+        {% for area in vacantes  %}
+        
+            {% include filter with areas=area.area %}
+
+        {% endfor %}
+    </div>
+        
+</section>
+    
+<button class="md:hidden p-3 bg-nav rounded-full fixed bottom-3 right-3 hover:shadow-inner hover:shadow-blue-500/20" id="filter-open"><i class="fi fi-rr-settings-sliders text-blue-500 text-2xl"></i></button>
+
+{% endblock %}

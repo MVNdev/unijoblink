@@ -1,0 +1,34 @@
+{% extends '../base.html' %} {% load static %}
+
+<!-- TODO: Hacer dinámico este título según el  -->
+{% block title %} {{ user.username }} {% endblock %}
+
+{% block nav %} {% include nav with data=nav_data %} {% endblock %}
+
+{% block body %}
+    <center>
+        <main class="w-11/12 md:w-10/12">
+            <form method="post" class="w-full flex flex-col gap-4 items-center">
+
+                {% csrf_token %}
+
+                    <input type="text" name="nombre" placeholder="Nombre completo" value="{{ name }}" class="form-inputs">
+
+                    <textarea name="carrera" rows="10" cols="20" class="form-inputs">Carreras</textarea>
+
+                    <select name="genero" class="form-inputs">
+                        <option value="" selected>--Elegir genero--</option>
+                        <option value="Femenino">Mujer</option>
+                        <option value="Masculino">Hombre</option>
+                    </select>
+
+                    <textarea name="experiencia" rows="10" cols="20" class="form-inputs">Experiencia...</textarea>
+
+                <button type="submit" class="border-2 border-blue-700 hover:bg-blue-600 hover:text-white transition-colors p-2 rounded-md w-2/3 my-4"> Guardar </button>
+            </form>
+        </main>
+    </center>
+
+{% endblock %}
+
+

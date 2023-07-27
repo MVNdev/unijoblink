@@ -1,0 +1,16 @@
+
+
+<div class="mt-3 ml-2">
+    <p class="font-normal text-base">Vacantes postuladas</p>
+</div>
+
+{% for postulado in postulados %}
+<div class="overflow-y-auto flex justify-between items-center px-2 w-full">
+    <p class="font-light ml-2 mt-2 cursor-pointer">{{ postulado.vacante }}</p>
+    <a href="{% url 'delete' postulado.id %}" class="delete">
+        <!-- <i class="fi fi-sr-cross-circle text-red-600"></i> -->
+    </a>
+</div>
+{% endfor %}
+
+
